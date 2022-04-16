@@ -1,0 +1,44 @@
+@charset "UTF-8";
+:root {
+    --background-color: #15C3D6;
+    --text-color-primary: #4b4a67;
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+    height: 100vh;
+    color: var(--text-color-primary);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.page {
+    display: flex;
+    background-color:var(--background-color);
+    justify-content: center;
+    align-items: center;
+}
+
+.page-container {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.page-container-info {
+    width: 320px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.page-container-form {
+    margin-top: 15px;
+    width: 320px;
+    display: flex;
+    justify-content: space-evenly;
+}
