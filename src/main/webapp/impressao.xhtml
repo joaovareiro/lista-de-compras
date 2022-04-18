@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:p="http://java.sun.com/jsf/html" xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xml:lang="en" lang="en">
+
+        <h:panelGroup styleClass="" style="width: 400px">
+            <h:dataTable  value="#{listaBean.listaCompras}" var="item">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Lista de Compras"/>
+                    </f:facet>
+                    ${item}
+                </h:column>
+            </h:dataTable>
+            <h:panelGroup>
+                <h:commandLink onclick="history.go(-1)">Voltar</h:commandLink>
+            </h:panelGroup>
+        </h:panelGroup>
+</html>

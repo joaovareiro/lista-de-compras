@@ -2,35 +2,60 @@
 <!DOCTYPE html
         PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:p="http://java.sun.com/jsf/html" xmlns:h="http://java.sun.com/jsf/html"
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
       xml:lang="en" lang="en">
 <h:head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Gestão de Biblioteca</title>
+    <title>lista</title>
     <h:outputStylesheet library="css" name="style.css"/>
 </h:head>
 
 <body>
 <div class="page">
     <div class="page-container">
-        <h1>Lista de Compras</h1>
-        <div class="page-container-info">
-            <div class = "page-container-info--item">
-                <p:outputLabel>Item: </p:outputLabel>
-                <p:inputText></p:inputText>
-            </div>
-                <p:commandButton style="height: 20px;width: 20px" value="+"></p:commandButton>
-        </div>
+        <h:form>
+            <h:panelGroup style="width: 800px;display: flex; justify-content: space-between">
 
-        <br/>
-        <div class="page-container-form">
+                <div>
+                    <h:outputText value="Item: "/>
+                    <h:inputText id="name" value="#{listaBean.item.nomeItem}"/>
+                </div>
+                <div>
+                    <h:outputText value="Quantidade: "/>
+                    <h:inputText id="quantity" value="#{listaBean.item.qtd}"
+                                 required="true" requiredMessage="Campo obrigatório"
+                                 converterMessage="Por favor, digite um número decimal">
+                        <f:validator validatorId="com.example.listadecompras.validator.QuantityValidator"/>
+                    </h:inputText>
+                    <h:message for="quantity"/>
+                </div>
+                <div>
+                    <h:selectOneMenu value="#{listaBean.item.medida}" id="unidade" required="true"
+                                     requiredMessage="Campo obrigatório">
+                        <f:selectItem itemLabel="Selecione" itemValue="#{null}"/>
+                        <f:selectItems value="#{listaBean.medidasSet}" var="medida" itemValue="#{medida}"
+                                       itemLabel="#{medida.nomeMedida}"/>
+                    </h:selectOneMenu>
+                    <h:message for="unidade"/>
+                    <h:commandButton process="@form" value="+" action="#{listaBean.adicionar}"/>
+                </div>
+
+            </h:panelGroup>
+        </h:form>
         <h:panelGroup>
-            <p:selectManyListbox style="width: 250px; height: 250px"></p:selectManyListbox>
-            <p:commandButton style="height: 20px;width: 20px; margin-top: 112.5px " value="-"></p:commandButton>
+            <h:selectManyListbox id="list" value="#{listaBean.itensSelecionados}" rows="5" cols="50"
+                                 style="width: 850px;margin-top: 20px">
+                <f:selectItems value="#{listaBean.listaCompras}" var="item" itemValue="#{item.nomeItem}"
+                               itemLabel="#{item}"/>
+            </h:selectManyListbox>
         </h:panelGroup>
-        </div>
+        <h:commandButton process="@form" value="-" action="#{listaBean.remover}"/>
+
+        <h:panelGroup>
+            <h:link outcome="impressao.xhtml">Página de Impressão</h:link>
+        </h:panelGroup>
     </div>
 </div>
-
 </body>
 </html>
